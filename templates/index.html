@@ -9,8 +9,20 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/color-calendar/dist/css/theme-basic.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/color-calendar/dist/css/theme-glass.css" />
+    <script src="https://cdn.jsdelivr.net/npm/color-calendar/dist/bundle.min.js"></script>
+    <link rel="stylesheet" href="/Static/css/style.css">
 </head>
 <body>
+    <style>
+        body {
+            background-image: url("/static/group_ride_background_3.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
     <nav class="navbar navbar-expand-md bg-light"> <!-- Created a nav bar for the top of the page but having trouble spacing it out-->
         <ul class="navbar-nav">
             <!--These next three should be to the left-->
@@ -32,18 +44,75 @@
                 <a href="myaccount.html" class="nav-link">My Account</a>
             </li>
             <li class="nav-item px-4"> 
-                <a href="login.html" class="btn btn-primary" role="button">Log Out</a>
+                <a href="login.html" class="btn btn-secondary" role="button">Log Out</a>
             </li>
         </ul>
     </nav>
     <div class="row">
-        <div class="col">
-            <h1>Biking Community</h1>
+        <div class="col mx-3 px-3">
+            <h1 class="text-center py-3">Biking Community</h1>
+            <img src="/Static/grouprides_main.jpg" alt="" class="w-100 align-content-center py-4">
+            <div class="container py-5">
+                <h2 class="text-center">Create A Ride</h2>
+                <h4 class="text-center">Select a Date to Begin</h4>
+                <div class="form-inline justify-content-center">
+                    <input type="date" name="date" id="date" class="form-control">
+                    <button type="submit" class="btn btn-secondary">Join</button>
+                </div>
+            </div>
         </div>
         <div class="col">
-            <h1>Calendar</h1>
+            <h1 class="text-center py-3">Upcoming Group Rides</h1>
+            <div class="container">
+                <div class="text-center" id="color-calendar"></div>
+                <h2 class="text-center pt-3">Selected Events:</h2>
+                <div class="events-display text-center"></div>
+                
+            </div>
+                <script>new Calendar({
+                    id: '#color-calendar',
+                    calendarSize: 'small',
+                    theme: 'glass',
+                    eventsData:[
+                        {
+                            start: '2022-02-22T18:00:00',
+                            end: '2022-02-22T20:00:00',
+                            name: 'Test Event 1',
+                            desc: 'Description of the event',
+                            url: 'https://www.google.com',
+                        },{
+                            start: '2022-03-12T18:00:00',
+                            end: '2022-03-12T20:00:00',
+                            name: 'Test Event 2',
+                            desc: 'Description of the event', 
+                            url: 'https://www.google.com',
+                        },
+                    ],
+                    headerBackgroundColor: 'orange',
+                    primaryColor: '#FF6E35',
+                    dateChanged: (currentDate, events) => {
+                        const events_display = document.querySelector('.events-display');
+                        let events_html = '';
+                        console.log(currentDate, events);
+                        events.forEach(event => {
+                            events_html += `
+                                <div class="event">
+                                    <div class="event-left">
+                                    <div class="event-title">${event.name}</div>
+                                    <a href="${event.url}" target="_blank" class="event-url">${event.url}</a>
+                                    </div>
+                                    <a href="groupridesdate.html" class="btn btn-primary" role="button">Join Ride</a>
+                                </div>
+                            `
+                        });
+                        if(events_html) {
+                            events_display.innerHTML = events_html;
+                        } else {
+                            events_display.innerHTML = '<div class="no-events-text">No events on this day :(</div>';
+                        }
+                    }
+                })</script>
         </div>
     </div>
-
 </body>
 </html>
