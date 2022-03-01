@@ -75,14 +75,16 @@
                 <div class="container">
                     <h2 class="display-4 text-center pb-3">Rides You Created</h2>
                     <div class="table-bordered border-dark p-3">
-                        <p>Ride Title:</p>
-                        <p>Ride Starting Point:</p>
-                        <img src="/Static/map_1.jpg" alt="" class="border ml-4 pb-2">
-                        <p><a href="">Route Guide</a></p>
-                        <p>Route Distance:</p>
-                        <p>Ride Date:</p>
-                        <p>Date Host Created Ride:</p>
-                        <p>Number of Riders Attending is:</p>
+                        {% for ride in user.ridescreated.all %}
+                            <p>Ride Title: {{ride.title}}</p>
+                            <p>Ride Starting Point: {{ride.startingpoint}}</p>
+                            <img src="/Static/map_1.jpg" alt="" class="border ml-4 pb-2">
+                            <p><a href="{{}}">Route Guide</a></p>
+                            <p>Route Distance: {{ride.distance))</p>
+                            <p>Ride Date: {{ride.dateofride}}</p>
+                            <p>Date Host Created Ride: {{ride.created_at}}</p>
+                            <p>Number of Riders Attending is: {{ride.users_joined.all.count}}</p>
+                        {% endfor %}
                         <div class="text-center">
                             <button type="submit" class="btn btn-danger">Delete Ride</button>
                         </div>

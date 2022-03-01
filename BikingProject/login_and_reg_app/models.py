@@ -35,6 +35,8 @@ class User(models.Model):
     lName = models.CharField(max_length=32)
     email = models.CharField(max_length=64)
     password = models.CharField(max_length=64)
+    skill = models.CharField(max_length=64)
+    preferred_ride_distance = models.CharField(max_length=64)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = userManager()

@@ -17,5 +17,6 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('bike/', include('BikeApp.urls')),
+    path('', include('login_and_reg_app.urls')),
+    path('bike/', include('BikeApp.urls'))
 ]
