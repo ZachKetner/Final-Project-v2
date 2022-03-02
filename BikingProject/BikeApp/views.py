@@ -8,7 +8,11 @@ import bcrypt
 def home(request):
     if 'user' not in request.session:
         return redirect('/')
-    return render(request, 'index.html')
+    user = User.objects.get(id=request.session['user'])
+    context = {
+        'user': user,
+    }
+    return render(request, 'index.html', context)
 
 def grouprides(request):
     user = User.objects.get(id=request.session['user'])
