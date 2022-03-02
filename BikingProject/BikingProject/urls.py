@@ -20,3 +20,4 @@ urlpatterns = [
     path('', include('login_and_reg_app.urls')),
     path('bike/', include('BikeApp.urls'))
 ]
+
