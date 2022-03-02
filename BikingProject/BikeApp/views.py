@@ -58,6 +58,15 @@ def updateaccount(request, id):
             userupdate.save()
             return redirect()
 
+def createride(request):
+    if request.method == 'POST':
+        uploaded_route = request.FILES['routefile']
+        fs = FileSystemStorage
+        fs.save(uploaded_route.name, uploaded_route)
+        currentUser = User.objects.get(id=request.session['user'])
+        newRide = Ride.objects.create(ridetitle=request.POST['ridetitle'], startingpoint= request.POST['startingpoint'], routefile= uploaded_route, distance=request.POST['distance'], dateofride=request.POST['dateofride'], skill=request.POST['skill'], desc=request.POST['desc'], ride_start_time=request.POST['ride_start_time'], est_end_time=request.POST['est_end_time'], ride_creator=currentUser)
+        return redirect('/myrides')
+
 def deleteuser(request, id):
     userToDelete = User.objects.filter(id=request.session['user'])
     if len(userToDelete) != 0:
