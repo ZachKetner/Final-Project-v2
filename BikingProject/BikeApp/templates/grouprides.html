@@ -40,26 +40,31 @@
                 <h2>Upcoming Rides</h2>
                 <div class="table-bordered">
                     {% for ride in rides %}
-                        <p>Ride Title: {{ride.title}}</p>
+                        <p>Ride Title: {{ride.ridetitle}}</p>
                         <p>Ride Starting Point: {{ride.startingpoint}}</p>
                         <p><a href="{{ride.routefile}}">Route Guide</a></p>
                         <p>Route Distance: {{ride.distance}}</p>
                         <p>Ride Date: {{ride.dateofride}}</p>
-                        <p>Ride Hosted by: {{ride.ride_creator}}</p>
+                        <p>Ride Hosted by: {{ride.ride_creator.fName}} {{ride.ride_creator.lName}}</p>
                         <p>Skill Level: {{ride.skill}}</p>
+                        {% if ride not in user.myrides.all %}
+                        <form action="/bike/join/{{ride.id}}" method="post">
+                            {% csrf_token %}
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success">Join</button>
+                            </div>
+                        </form>
+                        {% endif %}
                     {% endfor %}
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-success">Join</button>
-                    </div>
                 </div>
             </div>
             <div class="col">
                 <h2>My Rides Joined</h2>
                 <div class="table-bordered">
-                    {% for ride in ride.rides_joined.all %}
-                        <p>Ride Title:{{ride.title}}</p>
+                    {% for ride in user.myrides.all %}
+                        <p>Ride Title: {{ride.ridetitle}}</p>
                         <p>Date of Ride: {{ride.dateofride}}</p>
-                        <p># of Riders Joined:</p>
+                        <p># of Riders Joined: {{ride.users_joined.all.count}}</p>
                     {% endfor %}
                 </div>
             </div>

@@ -12,4 +12,6 @@ urlpatterns = [
     path('createride', views.createride),
     path('join/<int:id>', views.join),
     path('groupridedate', views.groupridedate),
+    path('deleteride/<int:id>', views.deleteride),
+    path('deleteuser/<int:id>', views.deleteuser)
 ]

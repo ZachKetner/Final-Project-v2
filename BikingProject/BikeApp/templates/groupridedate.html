@@ -39,7 +39,7 @@
             <div class="col">
                 <h2>Upcoming Ride on xx/xx/xxxx Date</h2>
                 <div class="table-bordered">
-                    <p>Ride Title:</p>
+                    <p>Ride Title: {{ride.ridetitle}}</p>
                     <p>Ride Starting Point:</p>
                     <p><a href="">Route Guide</a></p>
                     <p>Route Distance:</p>
@@ -54,9 +54,11 @@
             <div class="col">
                 <h2>My Rides Joined</h2>
                 <div class="table-bordered">
-                    <p>Ride Title:</p>
-                    <p>Date of Ride:</p>
-                    <p># of Riders Joined:</p>
+                    {% for ride in user.myrides.all %}
+                        <p>Ride Title: {{ride.ridetitle}}</p>
+                        <p>Date of Ride: {{ride.dateofride}}</p>
+                        <p># of Riders Joined: {{ride.users_joined.all.count}}</p>
+                    {% endfor %}
                 </div>
             </div>
         </div>
