@@ -24,7 +24,12 @@ def grouprides(request):
     return render(request, 'grouprides.html', context)
 
 def groupridedate(request):
-    return render(request, 'groupridedate.html')
+    user = User.objects.get(id=request.session['user'])
+    context = {
+        'user': user,
+        'rides': Ride.objects.all(),
+    }
+    return render(request, 'groupridedate.html', context)
 
 def joinride(request, id):
     ride = Ride.objects.get(id=id)
@@ -97,4 +102,4 @@ def deleteride(request, id):
     rideToDelete = Ride.objects.filter(id=id)
     if len(rideToDelete) != 0:
         rideToDelete[0].delete()
-    return redirect('/myaccount')
+    return redirect('/bike')

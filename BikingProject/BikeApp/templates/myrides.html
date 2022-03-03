@@ -38,8 +38,9 @@
                 <h2 class="display-4 text-center pb-3">Rides You Created</h2>
                 <div class="table-bordered border-dark p-3">
                     {% for ride in rides %}
+                        {% if ride in user.ridescreated.all %}
                         <p>Ride Title: {{ride.ridetitle}}</p>
-                        <p>Ride Starting Point:{{ride.startingpoint}}</p>
+                        <p>Ride Starting Point: {{ride.startingpoint}}</p>
                         <img src="/Static/map_1.jpg" alt="" class="border ml-4 pb-2">
                         <p><a href="">Route Guide</a></p>
                         <p>Route Distance: {{ride.distance}}</p>
@@ -52,9 +53,9 @@
                                     {% if user not in ride.users_joined.all %}
                                     <button type="submit" class="btn btn-success">Join Ride</button>
                                     {% endif %}
-                                
                             </form>
-                    </div>
+                        </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>
