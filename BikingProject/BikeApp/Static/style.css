@@ -1,3 +1,4 @@
+
 .background_image {
     opacity: 0.2;
 }
@@ -41,4 +42,9 @@ color: white;
 .fa-instagram {
 background: #125688;
 color: white;
+}
+
+.check{
+    font-size: x-large;
+    color: green;
 }
