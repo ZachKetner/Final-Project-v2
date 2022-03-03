@@ -8,4 +8,5 @@ urlpatterns = [
     path('myrides', views.myrides),
     path('myaccount/<int:id>', views.myaccount),
     path('updateaccount/<int:id', views.updateaccount),
+    path('createride', views.createride)
 ]
