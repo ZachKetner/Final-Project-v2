@@ -22,6 +22,9 @@ def grouprides(request):
     }
     return render(request, 'grouprides.html', context)
 
+def groupridedate(request):
+    return render(request, 'groupridedate.html')
+
 def joinride(request, id):
     ride = Ride.objects.get(id=id)
     user = User.objects.getg(id=request.session['user'])
