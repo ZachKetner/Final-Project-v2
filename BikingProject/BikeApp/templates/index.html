@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/color-calendar/dist/css/theme-glass.css" />
     <script src="https://cdn.jsdelivr.net/npm/color-calendar/dist/bundle.min.js"></script>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body {
@@ -60,8 +60,11 @@
                     <h2 class="text-center">Create A Ride</h2>
                     <h4 class="text-center">Select a Date to Begin</h4>
                     <div class="form-inline justify-content-center">
-                        <input type="date" name="date" id="date" class="form-control">
-                        <button type="submit" class="btn btn-secondary">Join</button>
+                        <form action="/bike/gotocreate" method="post">
+                            {% csrf_token %}
+                            <input type="date" name="date" id="date" class="form-control">
+                            <button type="submit" class="btn btn-secondary">Create</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -73,7 +76,7 @@
                     <div class="events-display text-center"></div>
                     
                 </div>
-                    <script>new Calendar({
+                <script>new Calendar({
                         id: '#color-calendar',
                         calendarSize: 'small',
                         theme: 'glass',
@@ -119,7 +122,7 @@
             </div>
         </div>
     </div>
-
+    
     <footer class="text-center" style="background-color: rgba(0, 0, 0, 0.2);">
                 <a href="https://facebook.com" class="fa fa-facebook"></a>
                 <a href="https://twitter.com" class="fa fa-twitter"></a>
