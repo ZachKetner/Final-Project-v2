@@ -36,12 +36,7 @@ def login_success(request):
     if 'user' not in request.session:
         return redirect('/')
     else:
-        selectedUser = User.objects.get(id=request.session['user'])
-        context = {
-            'All_users': User.objects.all(),
-            'user': selectedUser,
-        }
-        return render(request, 'success.html', context)
+        return redirect('bike/')
         
 def login(request):
     if request.method == 'POST':

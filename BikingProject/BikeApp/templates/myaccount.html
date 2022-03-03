@@ -25,10 +25,10 @@
         <h3 class="ml-4 text-light">My Account</h3>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item pr-3">
-                <a href="index.html" class="nav-link">Home</a>
+                <a href="/bike" class="nav-link">Home</a>
             </li>
             <li class="nav-item px-4"> 
-                <a href="login.html" class="btn btn-secondary" role="button">Log Out</a>
+                <a href="/" class="btn btn-secondary" role="button">Log Out</a>
             </li>
         </ul>
     </nav>
@@ -79,7 +79,7 @@
                             <p>Ride Title: {{ride.title}}</p>
                             <p>Ride Starting Point: {{ride.startingpoint}}</p>
                             <img src="/Static/map_1.jpg" alt="" class="border ml-4 pb-2">
-                            <p><a href="{{}}">Route Guide</a></p>
+                            <p><a href="{{ride.routefile}}">Route Guide</a></p>
                             <p>Route Distance: {{ride.distance))</p>
                             <p>Ride Date: {{ride.dateofride}}</p>
                             <p>Date Host Created Ride: {{ride.created_at}}</p>
