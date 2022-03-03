@@ -11,6 +11,7 @@ def home(request):
     user = User.objects.get(id=request.session['user'])
     context = {
         'user': user,
+        'rides': Ride.objects.all()
     }
     return render(request, 'index.html', context)
 
@@ -38,6 +39,13 @@ def myrides(request):
         'rides': Ride.objects.all(),
     }
     return render(request, 'myrides.html', context)
+
+def join(request, id):
+    myride = Ride.objects.get(id=id)
+    user = User.objects.get(id=request.session['user'])
+    myride.rides_joined.add(user)
+    myride.users_joined.add(user)
+    return redirect('/bike/myrides')
 
 def myaccount(request, id):
     user = User.objects.get(id=request.session['user'])
