@@ -11,48 +11,67 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            background-image: url("/static/background_4.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md bg-light">
-        <h1>Join a Ride!</h1>
+    <nav class="navbar navbar-expand-md bg-secondary navbar-dark">
+        <h3 class="ml-4 text-light">Join a Ride!</h3>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item pr-3">
                 <a href="/bike" class="nav-link">Home</a>
             </li>
             <li class="nav-item px-4"> 
-                <a href="/" class="btn btn-primary" role="button">Log Out</a>
+                <a href="/" class="btn btn-secondary" role="button">Log Out</a>
             </li>
         </ul>
     </nav>
-    <div class="row">
-        <div class="col-sm-4">
-            <h2>Upcoming Rides</h2>
-            <div class="table-bordered">
-                {% for ride in rides %}
-                    <p>Ride Title: {{ride.title}}</p>
-                    <p>Ride Starting Point: {{ride.startingpoint}}</p>
-                    <p><a href="{{ride.routefile}}">Route Guide</a></p>
-                    <p>Route Distance: {{ride.distance}}</p>
-                    <p>Ride Date: {{ride.dateofride}}</p>
-                    <p>Ride Hosted by: {{ride.ride_creator}}</p>
-                    <p>Skill Level: {{ride.skill}}</p>
-                {% endfor %}
-                <div class="text-center">
-                    <button type="submit">Join</button>
+    <div class="container">
+    <h1 class="display-4 text-center my-4">See All Upcoming Rides</h1>
+        <div class="row pt-3">
+            <div class="col">
+                <h2>Upcoming Rides</h2>
+                <div class="table-bordered">
+                    {% for ride in rides %}
+                        <p>Ride Title: {{ride.title}}</p>
+                        <p>Ride Starting Point: {{ride.startingpoint}}</p>
+                        <p><a href="{{ride.routefile}}">Route Guide</a></p>
+                        <p>Route Distance: {{ride.distance}}</p>
+                        <p>Ride Date: {{ride.dateofride}}</p>
+                        <p>Ride Hosted by: {{ride.ride_creator}}</p>
+                        <p>Skill Level: {{ride.skill}}</p>
+                    {% endfor %}
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success">Join</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <h2>My Rides Joined</h2>
+                <div class="table-bordered">
+                    {% for ride in ride.rides_joined.all %}
+                        <p>Ride Title:{{ride.title}}</p>
+                        <p>Date of Ride: {{ride.dateofride}}</p>
+                        <p># of Riders Joined:</p>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <h2>My Rides Joined</h2>
-            <div class="table-bordered">
-                {% for ride in ride.rides_joined.all %}
-                    <p>Ride Title:{{ride.title}}</p>
-                    <p>Date of Ride: {{ride.dateofride}}</p>
-                    <p>Date Joined Ride: </p>
-                    <p># of Riders Joined:</p>
-                {% endfor %}
-            </div>
-        </div>
     </div>
+    <footer class="text-center mt-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        <a href="https://facebook.com" class="fa fa-facebook"></a>
+        <a href="https://twitter.com" class="fa fa-twitter"></a>
+        <a href="https:/google.com" class="fa fa-google"></a>
+        <a href="https://linkedin.com" class="fa fa-linkedin"></a>
+        <a href="https://youtube.com" class="fa fa-youtube"></a>
+        <a href="https://instagram.com" class="fa fa-instagram"></a>
+    </footer>
 </body>
 </html>
