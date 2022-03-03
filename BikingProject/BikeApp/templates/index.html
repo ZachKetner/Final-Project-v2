@@ -60,16 +60,11 @@
                     <h2 class="text-center">Create A Ride</h2>
                     <h4 class="text-center">Select a Date to Begin</h4>
                     <div class="form-inline justify-content-center">
-<<<<<<< HEAD
-                        <input type="date" name="date" id="date" class="form-control">
-                        <a href="/createride" class="btn btn-secondary" role="button">Create</a>
-=======
                         <form action="/bike/gotocreate" method="post">
                             {% csrf_token %}
                             <input type="date" name="date" id="date" class="form-control">
                             <button type="submit" class="btn btn-secondary">Create</button>
                         </form>
->>>>>>> d89441b8da5cc4445fa6891e02ec941793c351be
                     </div>
                 </div>
             </div>
