@@ -10,5 +10,6 @@ urlpatterns = [
     path('updateaccount/<int:id', views.updateaccount),
     path('gotocreate', views.gotocreate),
     path('createride', views.createride),
+    path('join/<int:id>', views.join),
     path('groupridedate', views.groupridedate),
 ]
