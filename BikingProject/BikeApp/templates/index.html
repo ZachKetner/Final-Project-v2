@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/color-calendar/dist/css/theme-glass.css" />
     <script src="https://cdn.jsdelivr.net/npm/color-calendar/dist/bundle.min.js"></script>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body {
@@ -23,9 +23,9 @@
             background-size: cover;
         }
     </style>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-    
     <nav class="navbar navbar-expand-md bg-secondary navbar-dark"> <!-- Created a nav bar for the top of the page but having trouble spacing it out-->
         <ul class="navbar-nav">
             <!--These next three should be to the left-->
@@ -61,7 +61,7 @@
                     <h4 class="text-center">Select a Date to Begin</h4>
                     <div class="form-inline justify-content-center">
                         <input type="date" name="date" id="date" class="form-control">
-                        <button type="submit" class="btn btn-secondary">Join</button>
+                        <a href="/createride" class="btn btn-secondary" role="button">Create</a>
                     </div>
                 </div>
             </div>
