@@ -77,48 +77,51 @@
                 </div>
                 {% for ride in rides %}
                 <script>
-                    events = [];
+                    var events = [];
                     for(var i = 0; i < 1; i++){
                         events.push({
                                 start: '{{ride.dateofride}}',
                                 end: '{{ride.dateofride}}',
                                 name: '{{ride.ridetitle}}',
-                                desc: '{{ride.desc}}',
+                                distance: '{{ride.distance}}',
+                                skill_level: '{{ride.skill}}',
                                 url: '/bike/joinride/{{ride.id}}',
-                            })
-                    }
-                        new Calendar({
-                        id: '#color-calendar',
-                        calendarSize: 'small',
-                        theme: 'glass',
-                        eventsData: events,
-                        headerBackgroundColor: 'orange',
-                        primaryColor: '#FF6E35',
-                        dateChanged: (currentDate, events) => {
-                            const events_display = document.querySelector('.events-display');
-                            let events_html = '';
-                            console.log(currentDate, events);
-                            events.forEach(event => {
-                                events_html += `
-                                    <div class="event">
-                                        <div class="event-left">
-                                        <div class="event-title">${event.name}</div>
-                                        <a href="${event.url}" target="_blank" class="event-url">${event.url}</a>
-                                        </div>
-                                        <a href="/bike/groupridedate" class="btn btn-success" role="button">Join Ride</a>
-                                    </div>
-                                `
                             });
-                            if(events_html) {
-                                events_display.innerHTML = events_html;
-                            } else {
-                                events_display.innerHTML = '<div class="no-events-text">No events on this day :(</div>';
-                            }
+                    }
+                </script>
+                {% endfor %}
+                <script>
+                    new Calendar({
+                    id: '#color-calendar',
+                    calendarSize: 'small',
+                    theme: 'glass',
+                    eventsData: events,
+                    headerBackgroundColor: 'orange',
+                    primaryColor: '#FF6E35',
+                    dateChanged: (currentDate, events) => {
+                        const events_display = document.querySelector('.events-display');
+                        let events_html = '';
+                        console.log(currentDate, events);
+                        events.forEach(event => {
+                            events_html += `
+                                <div class="event">
+                                    <div class="event-left">
+                                    <div class="event-title mb-2">${event.name}</div>
+                                    <div class="event-title mb-2">Ride distance is: ${event.distance} miles with a skill level of ${event.skill_level}</div>
+                                    <a href="${event.url}" class="event-url btn btn-success">Look into Ride</a>
+                                    </div>
+                                    
+                                </div>
+                            `
+                        });
+                        if(events_html) {
+                            events_display.innerHTML = events_html;
+                        } else {
+                            events_display.innerHTML = '<div class="no-events-text">No events on this day :(</div>';
                         }
-                    })
-                    
-                    </script>
-                    {% endfor %}
+                    }
+                })
+                </script>    
             </div>
         </div>
     </div>
