@@ -29,6 +29,21 @@ class userManager(models.Manager):
         elif not bcrypt.checkpw(postData['password'].encode(),checkuser[0].password.encode()):
             errors['passwordNoMatch'] = "Invalid Email and Password combination"
         return errors
+    def user_edit_validator(self, postData, user):
+        errors = {}
+        if len(postData['fName']) <1:
+            errors['FirstNameEmpty'] = "Must enter a first name."
+        if len(postData['lName']) <1:
+            errors['LastNameEmpty'] = "Must enter a last name."
+        if len(postData['email']) <1:
+            errors['EmailEmpty'] = "Must enter an email."
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        if not EMAIL_REGEX.match(postData['email']):
+            errors['Email'] = "Invalid email address."
+        if len(User.objects.filter(email=postData['email']))>0:
+            if user.email != postData['email']:
+                errors['EmailExists'] = "There's a user already using this email address."
+        return errors
 
 class User(models.Model):
     fName = models.CharField(max_length=32)

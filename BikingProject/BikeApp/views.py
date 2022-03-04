@@ -103,3 +103,20 @@ def deleteride(request, id):
     if len(rideToDelete) != 0:
         rideToDelete[0].delete()
     return redirect('/bike')
+
+def edituser(request, id):
+    user = User.objects.get(id=request.session['user'])
+    errors = User.objects.user_edit_validator(request.POST, user)
+    if errors:
+        for value in errors.values():
+            messages.error(request, value)
+        return redirect(f'/bike/myaccount/' +str(id))
+    else:
+        updateuser = User.objects.get(id=id)
+        updateuser.fName = request.POST['fName']
+        updateuser.lName = request.POST['lName']
+        updateuser.email = request.POST['email']
+        updateuser.skill = request.POST['skill']
+        updateuser.preferred_ride_distance = request.POST['preferred_ride_distance']
+        updateuser.save()
+        return redirect(f'/bike/myaccount/' + str(id) )
