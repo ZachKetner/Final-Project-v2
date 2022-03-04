@@ -90,7 +90,7 @@
                             <p>Date Host Created Ride: {{ride.created_at}}</p>
                             <p>Number of Riders Attending is: {{ride.users_joined.all.count}}</p>
                             <div class="text-center">
-                                <a href="/bike/deleteride/{{ride.id}}"><button type="submit" class="btn btn-danger" >Delete Ride</button></a>
+                                <a href="/bike/deleteride/{{ride.id}}/{{user.id}}"><button type="submit" class="btn btn-danger" >Delete Ride</button></a>
                             </div>
                         {% endfor %}
                     </div>

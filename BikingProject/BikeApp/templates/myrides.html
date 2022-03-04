@@ -40,7 +40,10 @@
                     {% for ride in rides %}
                         {% if ride in user.ridescreated.all %}
                         <p>Ride Title: {{ride.ridetitle}}</p>
-                        <p>Ride Starting Point: {{ride.startingpoint}}</p>
+                        <form action="/bike/location/{{ride.id}}/{{ride.startingpoint}}" method="post">
+                            {% csrf_token %}
+                            <p>Ride Starting Point: <a href="/bike/location/{{ride.id}}/{{ride.startingpoint}}">{{ride.startingpoint}}</a></p>
+                        </form>
                         <img src="/Static/map_1.jpg" alt="" class="border ml-4 pb-2">
                         <p><a href="">Route Guide</a></p>
                         <p>Route Distance: {{ride.distance}}</p>
