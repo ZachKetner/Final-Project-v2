@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from .models import *
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
+import requests
 import bcrypt
 
 def home(request):
@@ -44,7 +45,26 @@ def myrides(request):
         'user': user,
         'rides': Ride.objects.all(),
     }
+    
     return render(request, 'myrides.html', context)
+
+def location(request, id, startingpoint):
+    ride = Ride.objects.get(id=id)
+    startpoint = Ride.objects.get(startingpoint=startingpoint)
+    print(startingpoint)
+    url = "https://google-maps-geocoding.p.rapidapi.com/geocode/json"
+
+    querystring = {"address":startpoint}
+
+    headers = {
+        'x-rapidapi-host': "google-maps-geocoding.p.rapidapi.com",
+        'x-rapidapi-key': "7acc907995msh096f900a346c1a8p12357ejsnad80b79afcfd"
+        }
+
+    response = requests.request("GET", url, headers=headers, params=querystring)
+
+    print(response.text)
+    return redirect('/bike/grouprides')
 
 def join(request, id):
     myride = Ride.objects.get(id=id)
@@ -104,11 +124,11 @@ def deleteuser(request, id):
         userToDelete[0].delete()
     return redirect('/')
 
-def deleteride(request, id):
+def deleteride(request, id, userid):
     rideToDelete = Ride.objects.filter(id=id)
     if len(rideToDelete) != 0:
         rideToDelete[0].delete()
-    return redirect('/bike')
+    return redirect(f'/bike/myaccount/' +str(userid))
 
 def edituser(request, id):
     user = User.objects.get(id=request.session['user'])

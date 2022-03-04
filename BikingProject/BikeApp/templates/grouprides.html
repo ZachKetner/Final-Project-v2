@@ -38,8 +38,8 @@
         <div class="row pt-3">
             <div class="col">
                 <h2>Upcoming Rides</h2>
+                {% for ride in rides %}
                 <div class="table-bordered">
-                    {% for ride in rides %}
                         <p>Ride Title: {{ride.ridetitle}}</p>
                         <p>Ride Starting Point: {{ride.startingpoint}}</p>
                         <p><a href="{{ride.routefile}}">Route Guide</a></p>
@@ -55,8 +55,8 @@
                             </div>
                         </form>
                         {% endif %}
+                    </div>
                     {% endfor %}
-                </div>
             </div>
             <div class="col">
                 <h2>My Rides Joined</h2>
