@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from multiprocessing import context
 from django.shortcuts import render, redirect
 from .models import *
@@ -11,7 +12,7 @@ def home(request):
     user = User.objects.get(id=request.session['user'])
     context = {
         'user': user,
-        'rides': Ride.objects.all()
+        'rides': Ride.objects.all(),
     }
     return render(request, 'index.html', context)
 
@@ -28,9 +29,9 @@ def groupridedate(request):
 
 def joinride(request, id):
     ride = Ride.objects.get(id=id)
-    user = User.objects.getg(id=request.session['user'])
+    user = User.objects.get(id=request.session['user'])
     ride.rides_joined.add(user)
-    return redirect('home')
+    return redirect('/bike/groupridedate')
 
 def myrides(request):
     user = User.objects.get(id=request.session['user'])
@@ -80,9 +81,14 @@ def gotocreate(request):
 
 def createride(request):
     if request.method == 'POST':
-        uploaded_route = request.FILES['routefile']
-        fs = FileSystemStorage()
-        fs.save(uploaded_route.name, uploaded_route)
+        print(request.POST)
+        print(request.FILES)
+        if request.FILES:
+            uploaded_route = request.FILES['routefile']
+            fs = FileSystemStorage()
+            fs.save(uploaded_route.name, uploaded_route)
+        else:
+            uploaded_route = None
         currentUser = User.objects.get(id=request.session['user'])
         newRide = Ride.objects.create(ridetitle=request.POST['ridetitle'], startingpoint= request.POST['startingpoint'], routefile= uploaded_route, distance=request.POST['distance'], dateofride=request.POST['dateofride'], skill=request.POST['skill'], desc=request.POST['desc'], ride_start_time=request.POST['ride_start_time'], est_end_time=request.POST['est_end_time'], ride_creator=currentUser)
         return redirect('/bike/myrides')

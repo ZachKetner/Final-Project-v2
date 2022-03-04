@@ -75,25 +75,23 @@
                     <div class="events-display text-center"></div>
                     
                 </div>
-                <script>new Calendar({
+                {% for ride in rides %}
+                <script>
+                    events = [];
+                    for(var i = 0; i < 1; i++){
+                        events.push({
+                                start: '{{ride.dateofride}}',
+                                end: '{{ride.dateofride}}',
+                                name: '{{ride.ridetitle}}',
+                                desc: '{{ride.desc}}',
+                                url: '/bike/joinride/{{ride.id}}',
+                            })
+                    }
+                        new Calendar({
                         id: '#color-calendar',
                         calendarSize: 'small',
                         theme: 'glass',
-                        eventsData:[
-                            {
-                                start: '2022-02-22T18:00:00',
-                                end: '2022-02-22T20:00:00',
-                                name: 'Test Event 1',
-                                desc: 'Description of the event',
-                                url: 'https://www.google.com',
-                            },{
-                                start: '2022-03-12T18:00:00',
-                                end: '2022-03-12T20:00:00',
-                                name: 'Test Event 2',
-                                desc: 'Description of the event', 
-                                url: 'https://www.google.com',
-                            },
-                        ],
+                        eventsData: events,
                         headerBackgroundColor: 'orange',
                         primaryColor: '#FF6E35',
                         dateChanged: (currentDate, events) => {
@@ -117,7 +115,10 @@
                                 events_display.innerHTML = '<div class="no-events-text">No events on this day :(</div>';
                             }
                         }
-                    })</script>
+                    })
+                    
+                    </script>
+                    {% endfor %}
             </div>
         </div>
     </div>
