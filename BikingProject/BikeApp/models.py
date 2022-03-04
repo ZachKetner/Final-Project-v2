@@ -5,7 +5,7 @@ from login_and_reg_app.models import *
 class Ride(models.Model):
     ridetitle = models.CharField(max_length=60)
     startingpoint = models.CharField(max_length=100)
-    routefile = models.FileField(upload_to='rides/routefiles', max_length=100, default="No file uploaded")
+    routefile = models.FileField(upload_to='rides/routefiles', max_length=100)
     distance = models.CharField(max_length=10)
     dateofride = models.DateField()
     skill = models.CharField(max_length=60)
