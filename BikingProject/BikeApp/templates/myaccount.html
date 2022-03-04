@@ -37,18 +37,19 @@
         <div class="row pt-3">
             <div class="col">
                     <h3 class="text-center pt-2 display-4">Update My Info</h3>
-                    <form class="form-horizontal pt-4 text-center" action="" method="post">
+                    <form class="form-horizontal pt-4 text-center" action="/bike/edituser/{{user.id}}" method="post">
+                        {% csrf_token %}
                         <div class="form-group">
                             <label class="control-label col-sm-3" for="fName">First Name</label>
-                            <input type="text" name="fName" id="fName">
+                            <input type="text" name="fName" id="fName" value="{{user.fName}}">
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3" for="lName">Last Name</label>
-                            <input type="text" name="lName" id="lName">
+                            <input type="text" name="lName" id="lName" value="{{user.lName}}">
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3" for="email">Email</label>
-                            <input type="email" name="email" id="email">
+                            <input type="email" name="email" id="email" value="{{user.email}}">
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="skill">Preferred Skill Level</label>
@@ -59,8 +60,8 @@
                             </select>
                         </div>
                         <div class="form-group pb-2">
-                            <label class="control-label col-sm-4" for="prefered_distance">Preferred Riding Distance</label>
-                            <select name="prefered_distance" id="prefered_distance">
+                            <label class="control-label col-sm-4" for="preferred_ride_distance">Preferred Riding Distance</label>
+                            <select name="preferred_ride_distance" id="preferred_ride_distance">
                                 <option value="short">Under 10 miles</option>
                                 <option value="intermediate">Between 10-25 miles</option>
                                 <option value="long">More Than 25 miles</option>
@@ -68,9 +69,12 @@
                         </div>
                         <div class="form-horizontal">
                             <button type="submit" class="btn btn-success">Update Changes</button>
+                        </form>
+                        <form action="/bike/deleteuser/{{user.id}}" method="post">
+                            {% csrf_token %}
                             <button type="submit" class="btn btn-danger">Delete User Profile</button>
+                        </form>
                         </div>
-                    </form>
             </div>
             <div class="col pt-2">
                 <div class="container">
@@ -86,7 +90,7 @@
                             <p>Date Host Created Ride: {{ride.created_at}}</p>
                             <p>Number of Riders Attending is: {{ride.users_joined.all.count}}</p>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-danger">Delete Ride</button>
+                                <a href="/bike/deleteride/{{ride.id}}"><button type="submit" class="btn btn-danger" >Delete Ride</button></a>
                             </div>
                         {% endfor %}
                     </div>
