@@ -11,7 +11,6 @@ urlpatterns = [
     path('gotocreate', views.gotocreate),
     path('createride', views.createride),
     path('join/<int:id>', views.join),
-    path('groupridedate', views.groupridedate),
     path('deleteride/<int:id>/<int:userid>', views.deleteride),
     path('deleteuser/<int:id>', views.deleteuser),
     path('edituser/<int:id>', views.edituser),
