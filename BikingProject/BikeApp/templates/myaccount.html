@@ -29,7 +29,7 @@
                 <a href="/bike" class="nav-link">Home</a>
             </li>
             <li class="nav-item px-4"> 
-                <a href="/" class="btn btn-secondary" role="button">Log Out</a>
+                <a href="/log_out" class="btn btn-secondary" role="button">Log Out</a>
             </li>
         </ul>
     </nav>
@@ -40,19 +40,19 @@
                     <form class="form-horizontal pt-4 text-center" action="/bike/edituser/{{user.id}}" method="post">
                         {% csrf_token %}
                         <div class="form-group">
-                            <label class="control-label col-sm-3" for="fName">First Name</label>
+                            <label class="control-label col-sm-3 font-weight-bold" for="fName">First Name</label>
                             <input type="text" name="fName" id="fName" value="{{user.fName}}">
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3" for="lName">Last Name</label>
+                            <label class="control-label col-sm-3 font-weight-bold" for="lName">Last Name</label>
                             <input type="text" name="lName" id="lName" value="{{user.lName}}">
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3" for="email">Email</label>
+                            <label class="control-label col-sm-3 font-weight-bold" for="email">Email</label>
                             <input type="email" name="email" id="email" value="{{user.email}}">
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-4" for="skill">Preferred Skill Level</label>
+                            <label class="control-label col-sm-4 font-weight-bold" for="skill">Preferred Skill Level</label>
                             <select name="skill" id="skill">
                                 <option value="beginner">Beginner</option>
                                 <option value="intermediate">Intermediate</option>
@@ -60,7 +60,7 @@
                             </select>
                         </div>
                         <div class="form-group pb-2">
-                            <label class="control-label col-sm-4" for="preferred_ride_distance">Preferred Riding Distance</label>
+                            <label class="control-label col-sm-4 font-weight-bold" for="preferred_ride_distance">Preferred Riding Distance</label>
                             <select name="preferred_ride_distance" id="preferred_ride_distance">
                                 <option value="short">Under 10 miles</option>
                                 <option value="intermediate">Between 10-25 miles</option>
@@ -68,7 +68,7 @@
                             </select>
                         </div>
                         <div class="form-horizontal">
-                            <button type="submit" class="btn btn-success">Update Changes</button>
+                            <button type="submit" class="btn btn-success mb-2">Update Changes</button>
                         </form>
                         <form action="/bike/deleteuser/{{user.id}}" method="post">
                             {% csrf_token %}
@@ -79,21 +79,23 @@
             <div class="col pt-2">
                 <div class="container">
                     <h2 class="display-4 text-center pb-3">Rides You Created</h2>
+                    {% for ride in user.ridescreated.all %}
                     <div class="table-bordered border-dark p-3">
-                        {% for ride in user.ridescreated.all %}
-                            <p>Ride Title: {{ride.ridetitle}}</p>
-                            <p>Ride Starting Point: {{ride.startingpoint}}</p>
-                            <img src="/Static/map_1.jpg" alt="" class="border ml-4 pb-2">
-                            <p><a href="{{ride.routefile}}">Route Guide</a></p>
-                            <p>Route Distance: {{ride.distance}}</p>
-                            <p>Ride Date: {{ride.dateofride}}</p>
-                            <p>Date Host Created Ride: {{ride.created_at}}</p>
-                            <p>Number of Riders Attending is: {{ride.users_joined.all.count}}</p>
+                        
+                            <p><span class="font-weight-bold">Ride Title:</span> {{ride.ridetitle}}</p>
+                            <p><span class="font-weight-bold">Ride Starting Point:</span> {{ride.startingpoint}}</p>
+                            <img src="{% static 'map_1.jpg' %}" alt="" class="border ml-4 pb-2">
+                            <p><a href="{{ride.routefile}}"><span class="font-weight-bold">Route Guide</span></a></p>
+                            <p><span class="font-weight-bold">Route Distance:</span> {{ride.distance}}</p>
+                            <p><span class="font-weight-bold">Ride Date:</span> {{ride.dateofride}}</p>
+                            <p><span class="font-weight-bold">Date Host Created Ride:</span> {{ride.created_at}}</p>
+                            <p><span class="font-weight-bold">Number of Riders Attending is:</span> {{ride.users_joined.all.count}}</p>
                             <div class="text-center">
                                 <a href="/bike/deleteride/{{ride.id}}/{{user.id}}"><button type="submit" class="btn btn-danger" >Delete Ride</button></a>
                             </div>
-                        {% endfor %}
+                        
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

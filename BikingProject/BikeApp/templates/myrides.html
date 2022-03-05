@@ -29,7 +29,7 @@
                 <a href="/bike" class="nav-link">Home</a>
             </li>
             <li class="nav-item px-4"> 
-                <a href="/" class="btn btn-secondary" role="button">Log Out</a>
+                <a href="/log_out" class="btn btn-secondary" role="button">Log Out</a>
             </li>
         </ul>
     </nav>
@@ -41,17 +41,20 @@
                 <div class="table-bordered border-dark p-3">
                     
                         {% if ride in user.ridescreated.all %}
-                        <p>Ride Title: {{ride.ridetitle}}</p>
+                        <p><span class="font-weight-bold">Ride Title:</span> {{ride.ridetitle}}</p>
                         <form action="/bike/location/{{ride.id}}/{{ride.startingpoint}}" method="post">
                             {% csrf_token %}
-                            <p>Ride Starting Point: <a href="/bike/location/{{ride.id}}/{{ride.startingpoint}}">{{ride.startingpoint}}</a></p>
+                            <p><span class="font-weight-bold">Ride Starting Point:</span> <a href="/bike/location/{{ride.id}}/{{ride.startingpoint}}">{{ride.startingpoint}}</a></p>
                         </form>
-                        <img src="/Static/map_1.jpg" alt="" class="border ml-4 pb-2">
-                        <p><a href="">Route Guide</a></p>
-                        <p>Route Distance: {{ride.distance}}</p>
-                        <p>Ride Date: {{ride.dateofride}}</p>
-                        <p>Ride Hosted by: {{ride.ride_creator.fName}} {{ride.ride_creator.lName}}</p>
-                        <p>Number of Riders Attending is: {{ride.users_joined.all.count}}</p>
+
+                        <a href="https://maps.google.com/?q={{ride.startingpoint}}" target="_blank">
+                            <img src="{% static 'map_1.jpg' %}" alt="" class="border ml-4 pb-2 fa2" role="button"></a>
+
+                        <p><a href="/media/{{ride.routefile}}" target="_blank"><span class="font-weight-bold">Route Guide</span></a></p>
+                        <p><span class="font-weight-bold">Route Distance:</span> {{ride.distance}}</p>
+                        <p><span class="font-weight-bold">Ride Date:</span> {{ride.dateofride}}</p>
+                        <p><span class="font-weight-bold">Ride Hosted by:</span> {{ride.ride_creator.fName}} {{ride.ride_creator.lName}}</p>
+                        <p><span class="font-weight-bold">Number of Riders Attending is:</span> {{ride.users_joined.all.count}}</p>
                         <div class="text-center">
                             <form action="/bike/join/{{ride.id}}" method="post">
                                 {% csrf_token %}
@@ -68,9 +71,11 @@
             <div class="col pt-2 ml-3">
                 <h3 class="display-4 text-center pb-3">My Riding Stats</h3>
                 <div class="table-bordered border-dark p-3">
-                    <p class="mb-3">Joined Biking Community on: {{user.created_at}}</p>
-                    <p>Total Number of Rides Joined: {{user.myrides.all.count}}</p>
-                    <p>Miles Riden Since Joining: "Insert from Model Sum of miles riden"</p>
+                    <p class="mb-3"><span class="font-weight-bold">Joined Biking Community on:</span> {{user.created_at}}</p>
+                    <p><span class="font-weight-bold">Total Number of Rides Joined:</span> {{user.myrides.all.count}}</p>
+                    {% if ride in rides %}      <!-- Trying to figure out the right call to get all the miles riden -->
+                        <p>Miles Riden Since Joining: {{ride.distance}}</p>
+                    {% endif %}
                 </div>
             </div>
         </div>

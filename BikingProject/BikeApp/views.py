@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from .models import *
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
-import requests
+
 import bcrypt
 
 def home(request):
@@ -25,19 +25,17 @@ def grouprides(request):
     }
     return render(request, 'grouprides.html', context)
 
-def groupridedate(request):
-    user = User.objects.get(id=request.session['user'])
-    context = {
-        'user': user,
-        'rides': Ride.objects.all(),
-    }
-    return render(request, 'groupridedate.html', context)
+
 
 def joinride(request, id):
-    ride = Ride.objects.get(id=id)
+    selected_ride = Ride.objects.get(id=id)
     user = User.objects.get(id=request.session['user'])
-    ride.rides_joined.add(user)
-    return redirect('/bike/groupridedate')
+    # Ride.rides_joined.add(user)
+    context = {
+        'user': user,
+        'ride': selected_ride,
+    }
+    return render(request, 'groupridedate.html', context)
 
 def myrides(request):
     user = User.objects.get(id=request.session['user'])
@@ -101,8 +99,14 @@ def updateaccount(request, id):
 def gotocreate(request):
     if request.method == 'POST':
         print(request.POST)
+        select_date = request.POST['date']
+        context= {
+            'select_date': select_date, 
+        }
+    else:
+        return redirect('/bike')
         
-    return render(request, 'createride.html')
+    return render(request, 'createride.html', context)
 
 def createride(request):
     if request.method == 'POST':
@@ -110,6 +114,8 @@ def createride(request):
         print(request.FILES)
         if request.FILES:
             uploaded_route = request.FILES['routefile']
+            print(uploaded_route.name)
+            print(uploaded_route.size)
             fs = FileSystemStorage()
             fs.save(uploaded_route.name, uploaded_route)
         else:

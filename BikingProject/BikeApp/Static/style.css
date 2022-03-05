@@ -2,7 +2,19 @@
 .background_image {
     opacity: 0.2;
 }
+#hover {
+    opacity: 0.5;
+}
+.fa2 {
+    width: auto;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
 
+} 
+.fa2:hover {
+    opacity: 0.7;
+}
 .fa {
     padding: 20px;
     width: auto;
@@ -42,9 +54,4 @@ color: white;
 .fa-instagram {
 background: #125688;
 color: white;
-}
-
-.check{
-    font-size: x-large;
-    color: green;
 }
