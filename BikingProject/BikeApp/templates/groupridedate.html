@@ -24,6 +24,20 @@
 <body>
     <nav class="navbar navbar-expand-md bg-secondary navbar-dark">
         <h3 class="ml-4 text-light">Join a Ride!</h3>
+        <ul class="navbar-nav">
+            <p class="pt-2 ml-3">|</p>
+            <li class="nav-item px-2">
+                <a class="nav-link" href="/bike/grouprides">Group Rides</a>
+            </li>
+            <p class="pt-2 ml-1">|</p>
+            <li class="nav-item px-2">
+                <a class="nav-link" href="/bike/myrides">My Rides</a>
+            </li>
+            <p class="pt-2 ml-1">|</p>
+            <li class="nav-item px-2">
+                <a href="/bike/myaccount/{{user.id}}" class="nav-link">My Account</a>
+            </li>
+        </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item pr-3">
                 <a href="/bike" class="nav-link">Home</a>
@@ -40,8 +54,8 @@
                 <h3>Upcoming Ride on {{ride.dateofride}} Date</h3>
                 <div class="table-bordered border-dark p-3">
                     <p><span class="font-weight-bold">Ride Title:</span> {{ride.ridetitle}}</p>
-                    <a href="https://maps.google.com/?q={{ride.startingpoint}}" target="_blank" >
-                        <img src="{% static 'map_1.jpg' %}" alt="" class="border ml-4 pb-2 fa2" role="button"></a>
+                    <a href="https://maps.google.com/?q={{ride.startingpoint}}" target="_blank"> 
+                        <button class="btn btn-info mb-3">Show Starting Point</button></a>
                     <p><a href="/media/{{ride.routefile}}"><span class="font-weight-bold">Route Guide</span></a></p>
                     <p></p><span class="font-weight-bold">Route Distance:</span> {{ride.distance}} </p>
                     <p><span class="font-weight-bold">Ride Date:</span> {{ride.dateofride}}</p>

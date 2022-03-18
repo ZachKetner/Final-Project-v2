@@ -77,25 +77,26 @@
                 </div>
                 {% for ride in rides %}
                 <script>
-                    var events = [];
-                    for(var i = 0; i < 1; i++){
-                        events.push({
-                                start: '{{ride.dateofride}}',
-                                end: '{{ride.dateofride}}',
-                                name: '{{ride.ridetitle}}',
-                                distance: '{{ride.distance}}',
-                                skill_level: '{{ride.skill}}',
-                                url: '/bike/joinride/{{ride.id}}',
-                            });
-                    }
+                    var EventData = [
+                        {
+                            start: '{{ride.dateofride}}',
+                            end: '{{ride.dateofride}}',
+                            name: '{{ride.ridetitle}}',
+                            distance: '{{ride.distance}}',
+                            skill_level: '{{ride.skill}}',
+                            url: '/bike/joinride/{{ride.id}}',
+                        }];
                 </script>
                 {% endfor %}
                 <script>
-                    new Calendar({
+                    // const EventsData = '{{EventData}}';
+
+                    // console.log(EventsData);
+                    let myCal = new Calendar({
                     id: '#color-calendar',
                     calendarSize: 'small',
                     theme: 'glass',
-                    eventsData: events,
+                    eventsData: EventData,
                     headerBackgroundColor: 'orange',
                     primaryColor: '#FF6E35',
                     dateChanged: (currentDate, events) => {
@@ -121,7 +122,8 @@
                         }
                     }
                 })
-                </script>    
+                </script>
+                    
             </div>
         </div>
     </div>

@@ -11,9 +11,21 @@ def home(request):
     if 'user' not in request.session:
         return redirect('/')
     user = User.objects.get(id=request.session['user'])
+    EventData = []
+    for ride in Ride.objects.all():
+        EventData.append({
+                        'start': ride.dateofride,
+                        'end': ride.dateofride,
+                        'name': ride.ridetitle,
+                        'distance': ride.distance,
+                        'skill_level': ride.skill,
+                        'url': '/bike/joinride/'+str(ride.id),
+                        })                    
+    print(EventData)
     context = {
         'user': user,
         'rides': Ride.objects.all(),
+        "EventData": EventData,
     }
     return render(request, 'index.html', context)
 
