@@ -24,6 +24,20 @@
 <body>
     <nav class="navbar navbar-expand-md bg-secondary navbar-dark">
         <h3 class="ml-4 text-light">Create a New Ride</h3>
+        <ul class="navbar-nav">
+            <p class="pt-2 ml-3">|</p>
+            <li class="nav-item px-2">
+                <a class="nav-link" href="/bike/grouprides">Group Rides</a>
+            </li>
+            <p class="pt-2 ml-1">|</p>
+            <li class="nav-item px-2">
+                <a class="nav-link" href="/bike/myrides">My Rides</a>
+            </li>
+            <p class="pt-2 ml-1">|</p>
+            <li class="nav-item px-2">
+                <a href="/bike/myaccount/{{user.id}}" class="nav-link">My Account</a>
+            </li>
+        </ul>
         <ul class="navbar-nav ml-auto">
             <!--These two need to be to the right of the page unlesss we can do this without using the navbar-->
             <li class="nav-item pr-3">
