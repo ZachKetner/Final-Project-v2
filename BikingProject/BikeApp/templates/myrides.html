@@ -24,6 +24,16 @@
     </style>
     <nav class="navbar navbar-expand-md bg-secondary navbar-dark">
         <h3 class="ml-4 text-light">My Rides</h3>
+        <ul class="navbar-nav">
+            <p class="pt-2 ml-3">|</p>
+            <li class="nav-item px-2">
+                <a class="nav-link" href="/bike/grouprides">Group Rides</a>
+            </li>
+            <p class="pt-2 ml-1">|</p>
+            <li class="nav-item px-2">
+                <a href="/bike/myaccount/{{user.id}}" class="nav-link">My Account</a>
+            </li>
+        </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item pr-3">
                 <a href="/bike" class="nav-link">Home</a>
@@ -38,33 +48,30 @@
             <div class="col pt-2 mr-3">
                 <h2 class="display-4 text-center pb-3">Rides You Created</h2>
                 {% for ride in rides %}
-                {% if ride in user.ridescreated.all %}
-                <div class="table-bordered border-dark p-3">
-                    
-                        <p><span class="font-weight-bold">Ride Title:</span> {{ride.ridetitle}}</p>
-                        <form action="/bike/location/{{ride.id}}/{{ride.startingpoint}}" method="post">
-                            {% csrf_token %}
-                            <p><span class="font-weight-bold">Ride Starting Point:</span> {{ride.startingpoint}}</p>
-                        </form>
-
-                        <a href="https://maps.google.com/?q={{ride.startingpoint}}" target="_blank">
-                            <img src="{% static 'map_1.jpg' %}" alt="" class="border ml-4 pb-2 fa2" role="button"></a>
-
-                        <p><a href="/media/{{ride.routefile}}" target="_blank"><span class="font-weight-bold">Route Guide</span></a></p>
-                        <p><span class="font-weight-bold">Route Distance:</span> {{ride.distance}}</p>
-                        <p><span class="font-weight-bold">Ride Date:</span> {{ride.dateofride}}</p>
-                        <p><span class="font-weight-bold">Ride Hosted by:</span> {{ride.ride_creator.fName}} {{ride.ride_creator.lName}}</p>
-                        <p><span class="font-weight-bold">Number of Riders Attending is:</span> {{ride.users_joined.all.count}}</p>
-                        <div class="text-center">
-                            <form action="/bike/join/{{ride.id}}" method="post">
+                    {% if ride in user.ridescreated.all %}
+                        <div class="table-bordered border-dark p-3">
+                            <p><span class="font-weight-bold">Ride Title:</span> {{ride.ridetitle}}</p>
+                            <form action="/bike/location/{{ride.id}}/{{ride.startingpoint}}" method="post">
                                 {% csrf_token %}
-                                    {% if user not in ride.users_joined.all %}
-                                    <button type="submit" class="btn btn-success">Join Ride</button>
-                                    {% endif %}
-                                
+                                <p><span class="font-weight-bold">Ride Starting Point:</span> {{ride.startingpoint}}</p>
                             </form>
+                            <a href="https://maps.google.com/?q={{ride.startingpoint}}" target="_blank"> 
+                                <button class="btn btn-info mb-3">Show Starting Point</button></a>   
+                                
+                            <p><a href="/media/{{ride.routefile}}" target="_blank"><span class="font-weight-bold">Route Guide</span></a></p>
+                            <p><span class="font-weight-bold">Route Distance:</span> {{ride.distance}}</p>
+                            <p><span class="font-weight-bold">Ride Date:</span> {{ride.dateofride}}</p>
+                            <p><span class="font-weight-bold">Ride Hosted by:</span> {{ride.ride_creator.fName}} {{ride.ride_creator.lName}}</p>
+                            <p><span class="font-weight-bold">Number of Riders Attending is:</span> {{ride.users_joined.all.count}}</p>
+                            <div class="text-center">
+                                <form action="/bike/join/{{ride.id}}" method="post">
+                                    {% csrf_token %}
+                                        {% if user not in ride.users_joined.all %}
+                                        <button type="submit" class="btn btn-success">Join Ride</button>
+                                        {% endif %}
+                                </form>
+                            </div>
                         </div>
-                    </div>
                     {% endif %}
                 {% endfor %}
             </div>
