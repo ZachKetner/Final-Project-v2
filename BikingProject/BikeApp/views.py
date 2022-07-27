@@ -71,7 +71,7 @@ def location(request, id, startingpoint):
         'x-rapidapi-key': "7acc907995msh096f900a346c1a8p12357ejsnad80b79afcfd"
         }
 
-    response = requests.request("GET", url, headers=headers, params=querystring)
+    response = request("GET", url, headers=headers, params=querystring)
 
     print(response.text)
     return redirect('/bike/grouprides')
